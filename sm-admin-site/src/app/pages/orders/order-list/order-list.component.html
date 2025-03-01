@@ -1,0 +1,96 @@
+<nb-card class="page-card inner_pages">
+  <nb-card-body [nbSpinner]="loadingList" nbSpinnerSize="large" nbSpinnerStatus="primary" class="orderList">
+    <div class="inner_pages_legacy">
+      <nb-card-header class="main_header">
+        <h1 class="page_title">{{ 'COMPONENTS.ORDERS' | translate}}</h1>
+        <div class="content_spacing_empty"></div>
+
+      </nb-card-header>
+
+      <form class="form-inline filter_section">
+        <div class="filter_left_section">
+        </div>
+        <div class="filter_right_section" *ngIf="isSuperAdmin">
+          <ngx-store-autocomplete (onStore)="onSelectStore($event)" [merchant]="selectedStore"></ngx-store-autocomplete>
+        </div>
+      </form>
+
+      <ng2-smart-table [settings]="settings" [source]="source" (custom)="onClickAction($event)" class="home-table">
+      </ng2-smart-table>
+
+      <ngx-paginator (changePage)="changePage($event)" [pagesToShow]="5" [currentPage]="currentPage" [perPage]="perPage"
+        [count]="totalCount">
+      </ngx-paginator>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+<button 
+  color="primary"
+  styleSheetFile="assets/css/order.css"
+  printSectionId="invoice-POS"
+  class="btn btn-sm d-none"
+  #printBtn
+  ngxPrint>Print with ngx-print
+</button>
+
+<div class="invoice-POS" id="invoice-POS">
+  <div class="logo"></div>
+  <div class="info">
+    <h2 style="text-align: center; border-bottom: 1px solid black; max-width: 44mm;">UNITEA</h2>
+  </div>
+  <!--End Info-->
+
+  <div id="mid">
+    <div class="info">
+      <h2 style="text-align: left; max-width: 44mm;line-height: normal;">To Go:</h2>
+      <h2 class="full-name" style="text-align: left; max-width: 44mm;margin-bottom: .1rem;">{{orderSelection?.billing?.firstName}} {{orderSelection?.billing?.lastName}}</h2>
+      <p>
+        Order #{{orderSelection?.id}} <br>
+      </p>
+      <p>
+        {{orderSelection?.invoiceDatePurchased}} <br>
+      </p>
+    </div>
+  </div>
+  <!--End Invoice Mid-->
+
+  <div id="bot">
+    <div>
+      <h2 class="count-products">{{orderSelection?.products?.length > 1 ? orderSelection?.products?.length + ' items': orderSelection?.products?.length + ' item'}}</h2>
+      <ul>
+        <li *ngFor="let item of orderSelection?.products;">
+          <span class="row m-0 flex-nowrap">
+            <p class="item-text bold-text">{{item.orderedQuantity}}&nbsp;x&nbsp;{{item.productName}}</p>
+          </span>
+          <span class="row m-0 topping">
+            <h3 *ngIf="item.topping?.length > 0">Toppings:</h3>
+            <span *ngFor="let topping of item.topping;">
+              <p class="item-text">- 1x&nbsp;{{topping.attributeValue}}</p>
+            </span>
+            <h3 *ngIf="item.noneTopping?.length > 0">Notes:</h3>
+            <span *ngFor="let nonetopping of item.noneTopping;">
+              <p class="item-text bold-text">-&nbsp;{{nonetopping.attributeValue === 'Yes' ? nonetopping.attributeName : nonetopping.attributeValue}}</p>
+            </span>
+          </span>
+        </li>
+      </ul>
+      <h2 style="line-height: normal; padding-top: .3rem;">{{orderSelection?.products?.length > 1 ? orderSelection?.products?.length + ' items': orderSelection?.products?.length + ' item'}}</h2>
+      <span class="row m-0 footer">
+        <h4>Already Paid!</h4>
+        <h4>Tax: ${{orderSelection?.tax}}</h4>
+        <h4>Tip: ${{orderSelection?.tip}}</h4>
+        <h4>Total: ${{orderSelection?.total?.value}}</h4>
+      </span>
+    </div>
+
+    <div id="legal-copy">
+      <p class="legal" style="text-align: center; max-width: 44mm;"><strong>Thank you for your order!</strong>
+      </p>
+    </div>
+
+  </div>
+  <!--End InvoiceBot-->
+</div>
+<!--End Invoice-->

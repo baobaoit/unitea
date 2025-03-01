@@ -1,0 +1,135 @@
+.info-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-block:last-child {
+  margin-top: 20px;
+}
+
+#bg-text
+{
+    color:lightgrey;
+    font-size:120px;
+}
+
+.box-overlay {
+    color: #fff;
+    opacity: .5;
+}
+
+
+.home_page {
+
+  .main_header {
+      .page_title {
+          margin-top: -25px;
+          font-weight: 600;
+
+      }
+
+}
+
+
+
+.main_spacer {
+  height:60px !important;
+}
+
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid #f7f7f7;
+    border-radius: .25rem;
+    box-shadow: 0 .75rem 6rem rgba(56,65,74,.03);
+    margin-bottom: 24px;
+    &.card-custom {
+        min-height: 172px;
+    }
+    
+    .card-body {
+        position: relative;
+        flex: 1 1 auto;
+        padding: 1.5rem 1.5rem;
+        .avatar-lg {
+            height: 4.5rem;
+            width: 4.5rem;
+            @media(min-width: 1280px) and (max-width: 1440px) {
+                height: 3.5rem;
+                width: 3.5rem;              
+            }
+            @media(min-width: 1025px) and (max-width: 1280px) {
+                height: 3.5rem;
+                width: 3.5rem;              
+            }
+        }
+    }
+    .bg-soft-primary {
+        background-color: rgba(102,88,221,.25)!important;
+    }
+    .bg-soft-success {
+        background-color: rgba(26,188,156,.25)!important;
+    }
+    .bg-soft-info {
+        background-color: rgba(79,198,225,.25)!important;
+    }
+    .bg-soft-warning {
+        background-color: rgba(247,184,75,.25)!important;
+    }
+    .avatar-title {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .font-16 {
+        font-size: 16px !important;
+    }
+    .text-primary {
+        color: #6658dd!important;
+    }
+    .header-title {
+        font-size: 1rem;
+        margin: 0 0 7px 0;
+    }
+    .view-more {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        cursor: pointer; 
+    }
+}
+
+@media(min-width: 1280px) and (max-width: 1440px) {
+    .dashboard-card-subtitle {
+        font-size: 0.9rem;
+    }
+    .dashboard-card-value {
+        font-size: 1.2rem;
+        overflow: hidden;
+        white-space: nowrap;
+    } 
+}
+@media(min-width: 1280px) and (max-width: 1360px) {
+    .dashboard-card-subtitle {
+        font-size: 0.9rem;
+    }            
+}
+@media(min-width: 1025px) and (max-width: 1280px) {
+    .dashboard-card-value {
+        font-size: 1.2rem;
+        overflow: hidden;
+        white-space: nowrap;
+    }  
+    .dashboard-card-subtitle {
+        font-size: 0.9rem;
+    }          
+}

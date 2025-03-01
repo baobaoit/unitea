@@ -1,0 +1,48 @@
+<div class="inner_pages tips-form-page">
+
+  <nb-card-header class="main_header">
+    <h1 class="page_title">{{ 'COMPONENTS.TIP_MANAGEMENT' | translate}}</h1>
+    <div class="content_spacing">
+      <button type="button" nbButton class="success_button" (click)="save()">{{'COMMON.SAVE' | translate }}</button>
+    </div>
+  </nb-card-header>
+
+  <div [nbSpinner]="loader" nbSpinnerSize="large" nbSpinnerStatus="primary">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <nb-card class="nb-card inline-form-card">
+          <nb-card-header class="nb-card-header">
+            Choose a default tip rate
+            <ngx-store-autocomplete (onStore)="onSelectStore($event)" [merchant]="merchantSelected"></ngx-store-autocomplete>
+          </nb-card-header>
+          <nb-card-body class="nb-card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <nb-radio-group [(ngModel)]="selectedTip" name="Tips Rates" class="tips-rate">
+                    <nb-radio *ngFor="let item of tipRates" [value]="item.percentage" class="tips-radio" (valueChange)="onChangeTips($event)">
+                       {{item.percentage}} %
+                      <button class="remove" (click)="onRemove($event, item)"><i class="nb-trash"></i></button>
+                    </nb-radio>
+                  </nb-radio-group>
+
+                  <nb-form-field>
+                    <nb-icon nbPrefix icon="percent-outline" pack="eva"></nb-icon>
+                    <input type="number" nbInput [(ngModel)]="newValue"
+                      placeholder="{{'TIP.ADD_TIP_RATE' | translate}}" 
+                      (keyup.enter)="addTipRates()">
+                  </nb-form-field>
+                  
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+   
+  </div>
+
+</div>
+

@@ -1,0 +1,82 @@
+.uploader-wrapper {
+  position: relative;
+  height: 100vh;
+  padding-top: 0px;
+  display: flex;
+  align-items: center;
+  /**justify-content: center;**/
+
+}
+
+::ng-deep .file-drop-wrapper {
+  background: #ffffff !important;
+  padding-top: 0px !important;
+  width: 100%;
+}
+
+::ng-deep #dropZone {
+  border: 2px dashed #a9a9b1 !important;
+}
+
+::ng-deep .ngx-close-icon-wrapper {
+  visibility: hidden !important;
+}
+
+#imageInput {
+  display: none;
+}
+
+.image-actions {
+  display: flex;
+  flex-direction: row;
+  button:first-child {
+    margin-right: 20px;
+  }
+}
+
+
+
+#dropZone .content{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/** grid **/
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px rgb(255, 255, 255) solid;
+  padding: 0px;
+  font-size: 30px;
+  text-align: center;
+
+  #clickableDeleteIcon {
+    cursor: pointer
+  }
+   
+
+  img {
+    max-width: 75%;
+    max-height: 75%;
+  }
+
+  .square {
+    height: 100px;
+    width: 100px;
+  }
+}
+

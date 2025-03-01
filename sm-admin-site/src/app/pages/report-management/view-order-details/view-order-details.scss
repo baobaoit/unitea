@@ -1,0 +1,43 @@
+.view-order-details {
+    background-color: white;
+    padding: 15px;
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .nb-theme-corporate nb-select.size-medium:not(.full-width) {
+        width: 100%;
+    }
+    .close {
+        right: 25px;
+        top: 25px;
+        width: 25px;
+        height: 25px;
+        opacity: 0.3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+  
+        &:hover {
+          opacity: 1;
+        }
+  
+        &:before,
+        &:after {
+          position: absolute;
+          content: " ";
+          height: 20px;
+          width: 2px;
+          background-color: #333;
+        }
+  
+        &:before {
+          transform: rotate(45deg);
+        }
+  
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+}

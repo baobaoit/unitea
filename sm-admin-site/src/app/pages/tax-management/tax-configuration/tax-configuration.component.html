@@ -1,0 +1,41 @@
+<div class="inner_pages tax-form-page">
+
+  <nb-card-header class="main_header">
+    <h1 class="page_title">{{ 'COMPONENTS.TAX_CONFIGURATION' | translate}}</h1>
+    <div class="content_spacing">
+      <button type="button" nbButton class="success_button" (click)="save()">{{'COMMON.SAVE' | translate }}</button>
+    </div>
+  </nb-card-header>
+
+  <div [nbSpinner]="loader" nbSpinnerSize="large" nbSpinnerStatus="primary">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <nb-card class="nb-card inline-form-card">
+          <nb-card-header class="nb-card-header">
+            Store
+            <ngx-store-autocomplete (onStore)="onSelectStore($event)" [merchant]="merchantSelected"></ngx-store-autocomplete>
+          </nb-card-header>
+          <nb-card-body class="nb-card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <nb-radio-group [(ngModel)]="selectedTax" name="Taxs" class="tax-configuration">
+                    <!-- (valueChange)="onChangeTax($event)" -->
+                    <nb-radio *ngFor="let item of taxConfiguration" [value]="item.value" class="tax-radio">
+                      {{item.name}}
+                    </nb-radio>
+                  </nb-radio-group>
+                  
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+   
+  </div>
+
+</div>
+

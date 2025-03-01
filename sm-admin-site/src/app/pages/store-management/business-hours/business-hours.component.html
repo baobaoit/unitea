@@ -1,0 +1,55 @@
+<div class="inner_pages business-hours-page">
+
+  <nb-card-header class="main_header">
+    <h1 class="page_title">{{ 'COMPONENTS.BUSINESS_HOURS' | translate}}</h1>
+    <div class="content_spacing">
+      <button type="button" nbButton class="success_button" (click)="saveBusinessHours()">{{'COMMON.SAVE' | translate }}</button>
+    </div>
+  </nb-card-header>
+
+  <div [nbSpinner]="loader" nbSpinnerSize="large" nbSpinnerStatus="primary">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <nb-card class="nb-card inline-form-card">
+          <nb-card-header class="nb-card-header">
+            Choose a store
+            <ngx-store-autocomplete (onStore)="onSelectStore($event)" [merchant]="merchantSelected"></ngx-store-autocomplete>
+          </nb-card-header>
+          <nb-card-body class="nb-card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <ul class="business-hours-container">
+                    <li class="business-hours-item" *ngFor="let item of businessHours;">
+                      <nb-checkbox [(ngModel)]="item.enabled">
+                      </nb-checkbox>
+                      <span class="day-label">{{item.display}}</span>
+                      <span>
+                        <p-dropdown [options]="timeOptions" [(ngModel)]="item.openingHour" filter="true">
+                          <ng-template let-item pTemplate="selectedItem">{{item.label}}</ng-template>
+                          <ng-template let-hours pTemplate="item">{{hours.label}}</ng-template>
+                        </p-dropdown>
+                      </span>
+                      <span>-</span>
+                      <span>
+                        <p-dropdown [options]="timeOptions" [(ngModel)]="item.closingHour" filter="true">
+                          <ng-template let-item pTemplate="selectedItem">{{item.label}}</ng-template>
+                          <ng-template let-hours pTemplate="item">{{hours.label}}</ng-template>
+                        </p-dropdown>
+                      </span>
+                      <a [href]="shopSite" *ngIf="item.currentDay" [ngClass]="{'open-now': item.hasOpenNow, 'closed-now': !item.hasOpenNow}">{{item.currentDay}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+   
+  </div>
+
+</div>
+

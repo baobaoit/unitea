@@ -1,0 +1,165 @@
+<div [nbSpinner]="loadingList" class="view-order-details" nbSpinnerSize="large" nbSpinnerStatus="primary">
+
+  <div malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+    <form #orderForm="ngForm" role="form">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <nb-card class="nb-card inline-form-card">
+            <nb-card-header class="nb-card-header">
+              {{'ORDER_FORM.BILLING_INFO' | translate}} <button class="close" type="button" (click)="cancel()"></button>
+            </nb-card-header>
+            <nb-card-body class="nb-card-body">
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.FIRST_NAME' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="first_name" placeholder="{{'ORDER_FORM.FIRST_NAME' | translate}}"
+                      [(ngModel)]="billing.firstName" name="firstName" required #firstName="ngModel">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.LAST_NAME' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="last_name" placeholder="{{'ORDER_FORM.LAST_NAME' | translate}}"
+                      [(ngModel)]="billing.lastName" name="lastName" required #lastName="ngModel">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.STREET_ADDRESS' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="billing_address" placeholder="{{'ORDER_FORM.STREET_ADDRESS' | translate}}"
+                      [(ngModel)]="billing.address" name="address" required #address="ngModel">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.CITY' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="billing_city" placeholder="{{'ORDER_FORM.CITY' | translate}}"
+                      [(ngModel)]="billing.city" name="city" required #city="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.COUNTRY' | translate}}<span>*</span></label>
+                    <nb-select *ngIf="billingCountry.length > 0" placeholder="{{'ORDER_FORM.SELECT_COUNTRY' | translate}}"
+                      outline shape="rectangle" [(ngModel)]="billing.country" name="country" (selectedChange)="onBillingChange($event, 1)"
+                      class="select_fields" required>
+                      <nb-option *ngFor="let country of billingCountry" [value]="country.code">{{ country.name }}
+                      </nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group" *ngIf="billingStateData.length > 0">
+                    <label class="label inputLabel">{{'ORDER_FORM.STATE' | translate}}<span>*</span></label>
+                    <nb-select placeholder="{{'ORDER_FORM.SELECT_STATE' | translate}}" outline shape="rectangle"
+                      [(ngModel)]="billing.zone" name="zone" class="select_fields" required>
+                      <nb-option *ngFor="let state of billingStateData" [value]="state.code">{{ state.name }}
+                      </nb-option>
+                    </nb-select>
+                  </div>
+                  <div class="form-group" *ngIf="billingStateData.length == 0">
+                    <label class="label inputLabel">{{'ORDER_FORM.STATE' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" placeholder="{{'ORDER_FORM.ENTER_STATE' | translate}}"
+                      [(ngModel)]="billing.zone" name="zone" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.POSTAL_CODE' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="billing_postal" placeholder="{{'ORDER_FORM.POSTAL_CODE' | translate}}"
+                      [(ngModel)]="
+                      billing.postalCode" name="postalCode" required
+                      #postalCode="ngModel">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.EMAIL' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="billing_email" placeholder="{{'ORDER_FORM.EMAIL' | translate}}"
+                      [(ngModel)]="info.emailAddress" name="emailAddress" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z0-9-.]{2,}"
+                      required #email="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.PHONE_NUMBER' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="billing_phone"
+                      placeholder="{{'ORDER_FORM.PHONE_NUMBER' | translate}}" [(ngModel)]="billing.phone" name="billing_phone"
+                      required #phone="ngModel" minlength=10 maxlength=14>
+
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="label inputLabel">{{'ORDER_FORM.ORDER_DATE' | translate}}<span>*</span></label>
+                    <input type="text" class="form-control inputText" id="datePurchased" placeholder="{{'ORDER_FORM.ORDER_DATE' | translate}}"
+                      [(ngModel)]="info.datePurchased" name="datePurchased" required #datePurchased="ngModel">
+                  </div>
+                </div>
+
+              </div>
+
+
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+      </div>
+    </form>
+    <div class="row" *ngIf="orderDetailsData">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <nb-card class="nb-card inline-form-card">
+          <div class="containerCenter">
+            <div class="centerSec">
+              <div class="tabelSec">
+                <table border="1" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>{{'ORDER_FORM.ITEM' | translate}}</th>
+                      <th>{{'ORDER_FORM.QUANTITY' | translate}}</th>
+                      <th>{{'ORDER_FORM.PRICE' | translate}}</th>
+                      <th>{{'ORDER_FORM.TOTAL' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of orderDetailsData.products">
+                      <td><span>{{product.productName}} -</span><span class="blueTxt">{{product.sku}}</span></td>
+                      <td>{{product.orderedQuantity}}</td>
+                      <td class="boldTxt">{{product.price}}</td>
+                      <td class="boldTxt">{{product.subTotal}}</td>
+                    </tr>
+                    <tr *ngFor="let total of orderDetailsData.totals">
+                      <td></td>
+                      <td colspan="2">{{total.module}}</td>
+                      <td class="boldTxt">{{total.value | currency}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="statusSec">
+                <label class="terms">{{'ORDER_FORM.TERMS_CONDITIONS' | translate}}: <span class="boldTxt">{{orderDetailsData.customerAgreed}}</span></label>
+                <label>{{'ORDER_FORM.PAYMENT_MODE' | translate}}</label>
+                <label class="boldTxt">{{orderDetailsData.paymentType}} - {{orderDetailsData.paymentModule}}</label>
+              </div>
+         
+            </div>
+          </div>
+        </nb-card>
+      </div>
+    </div>
+  </div>
+
+</div>
